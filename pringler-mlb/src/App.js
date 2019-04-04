@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Chart from './components/Chart';
 import PickForm from './components/PickForm';
-import MonthlyCalendar from './components/MonthlyCalendar';
 
 class App extends Component {
   constructor(){
@@ -20,7 +19,7 @@ class App extends Component {
     // Ajax calls here
     this.setState({
       chartData:{
-        labels: ['Day 0', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
+        labels: ['Day 0', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
         datasets:[
           {
             label:'Earnings',
@@ -32,6 +31,7 @@ class App extends Component {
               438,
               638,     
               642,         
+              742,
             ],
             backgroundColor:[
               'rgba(71, 203, 67, 1)',
@@ -57,8 +57,7 @@ class App extends Component {
         <div className="container">
           <Chart chartData={this.state.chartData} legendPosition="bottom"/>
         </div>
-        <div>
-        <MonthlyCalendar></MonthlyCalendar>
+        <div>        
         </div>
       </div>
     );

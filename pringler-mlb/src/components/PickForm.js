@@ -27,9 +27,12 @@ class Chart extends Component{
       rating: 1,
       team: 0,
       line: 0,
-      result: "Win",
+      result: 0,
       earnings: 0,    
       pickNumber: 1,
+      teamMessage: 'Select Team',
+      lineMessage: 'Select Line',
+      resultMessage: 'Select Result',
     }    
   }
 
@@ -37,15 +40,15 @@ class Chart extends Component{
     this.setState({
       month: event.target.value
     });
-    
+
     return true;
   }
 
   updateYear(event) {
     this.setState({
       year: event.target.value
-    });
-    
+    });    
+
     return true;
   }
 
@@ -53,7 +56,7 @@ class Chart extends Component{
     this.setState({
       day: event.target.value
     });
-    
+
     return true;
   }
 
@@ -61,7 +64,7 @@ class Chart extends Component{
     this.setState({
       team: event.target.value
     });
-    
+
     return true;
   }
 
@@ -69,7 +72,7 @@ class Chart extends Component{
     this.setState({
       line: event.target.value
     });
-    
+
     return true;
   }
 
@@ -85,49 +88,105 @@ class Chart extends Component{
     this.setState({
       result: event.target.value
     });
-    
+
+    this.updateEarnings();    
+        
     return true;
   }
 
   updateEarnings(event) {
 
-    if (this.state.result === "Win"){
+    var currentEarnings = 0;
+    const currentLine = this.state.line.replace(/\D/g,'');    
 
-      this.setState({
-        earnings: (this.state.rating * 100)
-      });
+
+    if (this.state.result === "Win"){
+      if (this.state.line.startsWith('+')){
+        currentEarnings = currentLine * this.state.rating;        
+      }
+      else if (this.state.line.startsWith('-')){
+        currentEarnings = this.state.rating * 100;
+      }
+    }
+    else if (this.state.result === "Lose"){
+      if (this.state.line.startsWith('+')){
+        currentEarnings = this.state.rating * -100;        
+      }
+      else if (this.state.line.startsWith('-')){
+        currentEarnings = this.state.rating * -currentLine;
+        
+      }
+    }
+    else if (this.state.result === "Push"){
+      currentEarnings = 0;
+    } 
+        
+    this.setState({
+      earnings: currentEarnings
+    });  
+    
+  }
+
+  displayUserMessages(){
+
+    var formErrorCount = 0;
+
+    if (this.state.team === 0){
+      this.setState({teamMessage: 'Select Team'});
+      formErrorCount++;
     }
     else{
-      this.setState({
-        earnings: (this.state.rating * -100)
-      });      
-    }    
-    return true;
+      this.setState({teamMessage: ''});
+    }
+
+    if (this.state.line === 0){
+      this.setState({lineMessage: 'Select Line'});
+      formErrorCount++;
+    }
+    else{
+      this.setState({lineMessage: ''});
+    }
+    
+    if (this.state.line === 0){
+      this.setState({resultMessage: 'Select Result'});
+      formErrorCount++;
+    }
+    else{
+      this.setState({resultMessage: ''});
+    }
+
+
+    return formErrorCount;
+
   }
+  
 
   updatePicks(event) {
 
-    // Create a new array based on current state:
-    let currentPicks = [...this.state.currentPicks];
+    if (this.displayUserMessages() === 0){
 
-    this.updateEarnings();    
-    
-    // Add item to it
-    currentPicks.push({ 
+      this.updateEarnings();    
 
-      year: this.state.year,
-      month: this.state.month,
-      day: this.state.day,
-      rating: this.state.rating,
-      team: this.state.team,
-      line: this.state.line,
-      result: this.state.result,
-      earnings: this.state.earnings,
-      pickNumber: (this.state.pickNumber++),
-
-     });
-
-     this.setState({currentPicks});
+      // Create a new array based on current state:
+      var currentPicks = [...this.state.currentPicks];
+  
+      // Add item to it
+      currentPicks.push({ 
+  
+        year: this.state.year,
+        month: this.state.month,
+        day: this.state.day,
+        rating: this.state.rating,
+        team: this.state.team,
+        line: this.state.line,
+        result: this.state.result,
+        earnings: this.state.earnings,
+        pickNumber: (this.state.currentPicks.length + 1),
+  
+       });
+  
+       this.setState({currentPicks});
+    }
     
     //return true;
   }
@@ -158,15 +217,60 @@ class Chart extends Component{
       return days;
     }
 
+    createTeams(){
+      let teamOutput = [];
+      const teams = ["Arizona Diamondbacks",
+      "Atlanta Braves",
+      "Baltimore Orioles",
+      "Boston Red Sox",
+      "Chicago Cubs",
+      "Chicago White Sox",
+      "Cincinnati Reds",
+      "Cleveland Indians",
+      "Colorado Rockies",
+      "Detroit Tigers",
+      "Miami Marlins",
+      "Houston Astros",
+      "Kansas City Royals",
+      "Los Angeles Angels of Anaheim",
+      "Los Angeles Dodgers",
+      "Milwaukee Brewers",
+      "Minnesota Twins",
+      "New York Mets",
+      "New York Yankees",
+      "Oakland Athletics",
+      "Philadelphia Phillies",
+      "Pittsburgh Pirates",
+      "Saint (St.) Louis Cardinals",
+      "San Diego Padres",
+      "San Francisco Giants",
+      "Seattle Mariners",
+      "Tampa Bay Rays",
+      "Texas Rangers",
+      "Toronto Blue Jays",
+      "Washington Nationals"];
+
+      for (var i = 0; i < teams.length; i++){
+        teamOutput.push(<option key={teams[i]} value={teams[i]}>{teams[i]}</option>);
+      }
+
+      return teamOutput;
+
+    }
+
     removeItemFromTable(inputPickNumber){
           
       // Create a new array based on current state:
       var currentPicks = [];
 
-      var currentPicks = this.state.currentPicks.filter(function (el) {
-        return el.pickNumber != inputPickNumber
+      currentPicks = this.state.currentPicks.filter(function (el) {
+        return el.pickNumber !== inputPickNumber
 
       });
+
+      for (var i = 0; i<currentPicks.length; i++){
+        currentPicks[i].pickNumber = i + 1;
+      }
 
       this.setState({currentPicks});
           
@@ -193,6 +297,7 @@ class Chart extends Component{
 
     }
 
+
   render(){
     return (
       <div className="pickForm">
@@ -204,70 +309,76 @@ class Chart extends Component{
   <div className="col-md-1 mb-1">
     <label >Year</label>
     <select className="form-control" id="yearInput" onChange={(e) => this.updateYear(e)}>
-      <option value={this.state.year}>{this.state.year}</option>
+      <option defaultValue={this.state.year}>{this.state.year}</option>
     </select>
   </div>
     <div className="col-md-2 mb-2">
-    <label >Month</label>
-    <select className="form-control" id="monthInput" onChange={(e) => this.updateMonth(e)}>
-      <option defaultValue={this.state.month}>{this.state.month}</option>
-      <option value='March'>March</option>
-      <option value='April'>April</option>
-      <option value='May'>May</option>
-      <option value='June'>June</option>
-      <option value='July'>July</option>
-      <option value='August'>August</option>
-      <option value='September'>September</option>
-      <option value='October'>October</option>
-    </select>
+      <label >Month</label>
+      <select className="form-control" id="monthInput" onChange={(e) => this.updateMonth(e)}>
+        <option defaultValue={this.state.month}>{this.state.month}</option>
+        <option value='March'>March</option>
+        <option value='April'>April</option>
+        <option value='May'>May</option>
+        <option value='June'>June</option>
+        <option value='July'>July</option>
+        <option value='August'>August</option>
+        <option value='September'>September</option>
+        <option value='October'>October</option>
+      </select>
     </div>
     <div className="col-md-1 mb-1">
-    <label >Day</label>
-    <select className="form-control" id="dayInput" onChange={(e) => this.updateDay(e)}>
-      <option defaultValue={this.state.day}>{this.state.day}</option>
-      {this.createDays()}
-    </select>
+      <label >Day</label>
+      <select className="form-control" id="dayInput" onChange={(e) => this.updateDay(e)}>
+        <option defaultValue={this.state.day}>{this.state.day}</option>
+        {this.createDays()}
+      </select>
     </div>
     <div className="col-md-1 mb-1">
-    <label >Rating</label>
-    <select className="form-control" id="ratingInput" onChange={(e) => this.updateRating(e)}>
-      <option defaultValue='1'>1</option>
-      <option value='2'>2</option>
-      <option value='3'>3</option>
-      <option value='4'>4</option>
-      <option value='5'>5</option>
-    </select>
+      <label >Rating</label>
+      <select className="form-control" id="ratingInput" onChange={(e) => this.updateRating(e)}>
+        <option defaultValue='1'>1</option>
+        <option value='2'>2</option>
+        <option value='3'>3</option>
+        <option value='4'>4</option>
+        <option value='5'>5</option>
+      </select>
     </div>
     <div className="col-md-3 mb-3">
-    <label >Team</label>
-    <select className="form-control" id="teamInput" onChange={(e) => this.updateTeam(e)}>
-      <option defaultValue='Choose...' >Choose...</option>
-      <option value='Toronto Blue Jays' >Toronto Blue Jays</option>
-    </select>
+      <label >Team</label>
+      <select className="form-control" id="teamInput" onChange={(e) => this.updateTeam(e)}>
+        <option defaultValue='Choose...' >Choose...</option>
+        {this.createTeams()}      
+      </select>
+      <p class="text-danger">{this.state.teamMessage}</p>            
     </div>
     <div className="col-md-1 mb-1">
-    <label >Line</label>
-    <select className="form-control" id="lineInput" onChange={(e) => this.updateLine(e)}>
-      <option defaultValue="Choose..." >Choose...</option>
-      {this.createLineOdds()}
-    </select>
+      <label >Line</label>
+      <select className="form-control" id="lineInput" onChange={(e) => this.updateLine(e)}>
+        <option defaultValue="Choose..." >Choose...</option>
+        {this.createLineOdds()}
+      </select>
+      <p class="text-danger">{this.state.lineMessage}</p>      
     </div>
     <div className="col-md-1 mb-1">
-    <label >Result</label>
-    <select className="form-control" id="resultInput" onChange={(e) => this.updateResult(e)}>
-      <option value="Win" >Win</option>
-      <option value="Lose" >Lose</option>
-      <option value="Push" >Push</option>      
-    </select>
+      <label >Result</label>
+      <select className="form-control" id="resultInput" onChange={(e) => this.updateResult(e)}>
+        <option defaultValue="Choose..." >Choose...</option>
+        <option value="Win" >Win</option>
+        <option value="Lose" >Lose</option>
+        <option value="Push" >Push</option>      
+      </select>
+      <p class="text-danger">{this.state.resultMessage}</p>      
     </div>
     <div className="col-md-1 mb-1">     
-    <label >Confirm</label>   
-    <button type="button" className="btn btn-success" onClick={(e) => this.updatePicks(e)}>Add Selection</button>
+      <label >Confirm</label>   
+      <button type="button" className="btn btn-success" onClick={(e) => this.updatePicks(e)}>Add Selection</button>
     </div>
+</div>
+<br></br>
 <br></br>
 <h2>Pending Picks</h2>
 
-  </div>
+  
   <table className="table table-sm">
   <thead>
     <tr>
@@ -285,11 +396,12 @@ class Chart extends Component{
   </thead>
   <tbody>
 {this.displayPickTable()}
-  </tbody>
+  </tbody>  
 </table>
 
 </div>
 </form>
+      
       </div>
     )
   }
