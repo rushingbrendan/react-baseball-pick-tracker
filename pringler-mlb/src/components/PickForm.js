@@ -33,7 +33,37 @@ class Chart extends Component{
       teamMessage: 'Select Team',
       lineMessage: 'Select Line',
       resultMessage: 'Select Result',
-    }    
+      updateTable: false
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.state.updateTable === true){
+     this.setState({
+       updateTable: false
+     });
+
+     // Create a new array based on current state:
+     var currentPicks = [...this.state.currentPicks];
+  
+     // Add item to it
+     currentPicks.push({ 
+ 
+       year: this.state.year,
+       month: this.state.month,
+       day: this.state.day,
+       rating: this.state.rating,
+       team: this.state.team,
+       line: this.state.line,
+       result: this.state.result,
+       earnings: this.state.earnings,
+       pickNumber: (this.state.currentPicks.length + 1),
+ 
+      });
+ 
+      this.setState({currentPicks});
+
+    }
   }
 
   updateMonth(event) {
@@ -87,9 +117,7 @@ class Chart extends Component{
   updateResult(event) {
     this.setState({
       result: event.target.value
-    });
-
-    this.updateEarnings();    
+    });    
         
     return true;
   }
@@ -122,7 +150,9 @@ class Chart extends Component{
     } 
         
     this.setState({
-      earnings: currentEarnings
+      earnings: currentEarnings,
+      updateTable: true
+
     });  
     
   }
@@ -131,7 +161,8 @@ class Chart extends Component{
 
     var formErrorCount = 0;
 
-    if (this.state.team === 0){
+    //check team value to make sure data is valid
+    if ((this.state.team === 0) || (this.state.team ==="Choose..")){
       this.setState({teamMessage: 'Select Team'});
       formErrorCount++;
     }
@@ -139,7 +170,8 @@ class Chart extends Component{
       this.setState({teamMessage: ''});
     }
 
-    if (this.state.line === 0){
+    //check line value to make sure data is valid
+    if ((this.state.line === 0) || (this.state.line == "Choose...")){
       this.setState({lineMessage: 'Select Line'});
       formErrorCount++;
     }
@@ -147,7 +179,8 @@ class Chart extends Component{
       this.setState({lineMessage: ''});
     }
     
-    if (this.state.line === 0){
+    //check result value to make sure data is valid
+    if ((this.state.result === 0) || (this.state.result === "Choose...")){
       this.setState({resultMessage: 'Select Result'});
       formErrorCount++;
     }
@@ -166,26 +199,7 @@ class Chart extends Component{
     if (this.displayUserMessages() === 0){
 
       this.updateEarnings();    
-
-      // Create a new array based on current state:
-      var currentPicks = [...this.state.currentPicks];
-  
-      // Add item to it
-      currentPicks.push({ 
-  
-        year: this.state.year,
-        month: this.state.month,
-        day: this.state.day,
-        rating: this.state.rating,
-        team: this.state.team,
-        line: this.state.line,
-        result: this.state.result,
-        earnings: this.state.earnings,
-        pickNumber: (this.state.currentPicks.length + 1),
-  
-       });
-  
-       this.setState({currentPicks});
+      
     }
     
     //return true;
