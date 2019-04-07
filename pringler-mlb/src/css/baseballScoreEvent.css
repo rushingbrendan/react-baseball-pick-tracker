@@ -1,0 +1,79 @@
+.baseballScoreContainer
+{
+   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  /* font-family: "Open Sans"; */
+  background-color: white;
+  min-width: 400px;
+  height: 150px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #CBCCCE;
+
+  margin-left:25px;
+  margin-bottom: 25px;
+  display:inline-block;
+   
+
+  /* APPLE: #E6E6EB   */
+}
+
+.baseballScoreSpaceAboveQuarters
+{
+  height: 10px;
+}
+
+.baseballScoreHeaderSpace
+{
+  width:80px;
+}
+
+.baseballScoreFont
+{
+  font-size: 12px;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  width:25px;
+  text-align: center;
+
+}
+
+.baseballScoreHeaderTotalSpace
+{
+    width:40px;
+}
+
+.spaceUnderQuarterTitles
+{
+  height: 1px;
+}
+
+.baseballScoreLineBreak
+{
+  
+  border-color: #CBCCCE;
+  height:1px;
+  margin-top:5px;
+  margin-bottom:20px;
+}
+
+.baseballTeamNameFont
+{
+  font-size: 18px;
+  
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  width:80px;
+  text-align: left;
+  text-indent: 15px;
+  
+}
+
+.baseballTotalScoreFont
+{
+  font-size: 20px;
+  
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  width:40px;
+  text-align: center;
+  font-weight: bold;
+}
+
+

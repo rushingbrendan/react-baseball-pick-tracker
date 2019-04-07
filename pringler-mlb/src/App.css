@@ -31,3 +31,209 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.headerLogo
+{
+
+  height: 85%;
+  float:left;
+  margin-left: 20px;
+
+}
+
+
+
+.HeaderContainer
+{
+
+  height: 120px;
+  background-color: rgb(41, 168, 247);
+    
+}
+.LinkContainer
+{
+  width: 100%;
+  background-color: rgb(41, 168, 247);  
+}
+
+.HeaderTitle
+{
+ color: white;
+ margin-left: 20px;
+ float:left;
+ font-family: "Helvetica Neue"; 
+ font-size: 50px;
+
+
+ 
+}
+
+.SpaceAboveTitle
+{
+  height:10px;
+  background-color: rgb(41, 168, 247);
+  
+}
+.SpaceBelowTitle
+{
+  height: 20px;
+  background-color: rgb(41, 168, 247);
+  
+}
+
+.SpaceBelowLinks
+{
+  height: 10px;
+  background-color: rgb(41, 168, 247);
+  
+}
+
+
+
+.SpaceUnderTitle
+{
+  height: 50px;
+  
+}
+
+.headerLinks
+{
+  display: inline-block;
+  background-color: rgb(41, 168, 247);
+  margin-left: 10px;
+  margin-right: 40px;
+  font-size: 28px;
+  font-family: "Helvetica Neue"; 
+  color:white;
+  
+  
+}
+
+
+
+.headerIconAlign
+{
+margin-left: 25px;
+}
+
+
+.headerLinkSpacing
+{
+  width:100px;
+}
+
+.headerLinks:hover
+{
+    color:rgb(189, 188, 188) !important;
+    background-image:none !important;
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+
+
+
+
+
+
+/* Sports Score Body Rectangle Div  */
+/* This div covers the entire body of the page */
+.sportsScoreBodyDiv
+{
+    
+    /* background-color: white; */
+    vertical-align: middle;    
+    min-width: 500px;
+    width: 800px;
+    margin: 0 auto;
+    
+
+    /* max-width: 800px; */
+
+    /* border-radius: 10px; */
+
+    background: rgb(131, 169, 224);
+
+
+    /* background: #212020;     */
+    /*  background-color: #212020; */
+    /* padding: 20px; */
+    /* width: 200px; */
+    /* height: 150px; */
+
+}
+
+.sportsMonitorHeader
+{
+  margin: 0 auto;
+  background: white;
+  position:absolute;
+  left:0;
+  right:0;
+}
+
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.footer
+{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:60px;   /* Height of the footer */
+  background-color: rgb(41, 168, 247);
+}
+
+.sportsScoreBodyDiv
+{
+  background-color: #EDEEF0;
+}

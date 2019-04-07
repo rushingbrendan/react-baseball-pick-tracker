@@ -19,7 +19,7 @@ class ChartData extends Component {
     // Ajax calls here
     this.setState({
       chartData:{
-        labels: ['Day 0', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+        labels: ['Day 0', 'Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7', 'Day 8', 'Day 9', 'Day 10'],
         datasets:[
           {
             label:'Earnings',
@@ -29,19 +29,18 @@ class ChartData extends Component {
               538, 
               638,
               438,
-              638,     
-              642,         
-              742,
+              538,     
+              542,         
+              642,
+              418,
+              370,
+              263,              
+
             ],
             backgroundColor:[
+              //'#FFE710',
               'rgba(71, 203, 67, 1)',
-              'rgba(71, 203, 67, 1)',
-              'rgba(71, 203, 67, 1)',
-              'rgba(71, 203, 67, 1)',
-              'rgba(71, 203, 67, 1)',
-              'rgba(71, 203, 67, 1)',
-              'rgba(71, 203, 67, 1)',
-              'rgba(71, 203, 67, 1)',
+
             ]
           }
         ]

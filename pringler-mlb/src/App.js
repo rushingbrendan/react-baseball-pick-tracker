@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import Chart from './components/Chart';
 import PickForm from './components/PickForm';
 import Header from './header';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ChartData from './ChartData';
+import BaseballScoreBoard from './components/BaseballScoreBoard.js';
 
 
 class App extends Component {
@@ -32,8 +32,14 @@ class App extends Component {
           <PickForm></PickForm>    
         )} />
 
+
+
         <Route exact={true} path="/resultdata" render={() => (
           <ChartData></ChartData>
+        )} />
+
+        <Route exact={true} path="/scores" render={() => (
+          <BaseballScoreBoard></BaseballScoreBoard>
         )} />
        
         
