@@ -8,8 +8,9 @@ import BaseballScoreEvent from './BaseballScoreEvent.js';
 // import { faSearch} from '@fortawesome/free-solid-svg-icons';
 // import { faCoffee} from '@fortawesome/free-solid-svg-icons';
 // import { faTimes } from '@fortawesome/free-solid-svg-icons';
+ //import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
-
+ //library.add(faCheckCircle);
 // library.add(faStar);
 // library.add(faSearch);
 // library.add(faCoffee);
@@ -33,12 +34,16 @@ class BaseballScoreBoard extends Component{
 
         { homeTeam:"NYY",  homeTeamScores:[ 0,1,1,2,1,0,1,3,1 ], 
           awayTeam: "NYM", awayTeamLine: '-130', awayTeamScores:[ 0,1,0,0,2,0,1,1,0 ],
-          gameTotal: '8.5' }
+          gameTotal: '8.5' },
+
+        { homeTeam:"BOS",  homeTeamScores:[ 0,1,1,2,1,0,1,3,1,1,1,2,1,0,1,3,1 ], 
+          awayTeam: "TB", awayTeamLine: '-130', awayTeamScores:[ 0,1,0,0,2,0,1,1,0,1,1,2,1,0,1,3,1 ],
+          gameTotal: '8.5' },
       ];
 
 
     return (
-        <div>
+        <div>          
           <br></br>
           {scoreData.map(currentScoreData =>
             <BaseballScoreEvent gameData={currentScoreData}></BaseballScoreEvent>

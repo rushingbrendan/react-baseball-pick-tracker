@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../App.css';
+import '../css/Header.css';
 
 
 class Header extends Component {
@@ -20,7 +21,7 @@ class Header extends Component {
     return (
       
 <div>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-custom">
   <a class="navbar-brand" href="#">Baseball Score Tracker</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -38,9 +39,6 @@ class Header extends Component {
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/resultdata/">Result Data</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
       </li>
     </ul>
   </div>

@@ -1,7 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import '../css/baseballScoreEvent.css';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
+library.add(faCheckCircle);
 class BaseballScoreEvent extends React.Component{
 
 
@@ -59,7 +63,7 @@ render(){
     
 
 return (
-    <div className="baseballScoreContainer">
+    <div className="baseballScoreContainer">    
         <table border="0px" className="baseballScoreTableTop">
             <tr className="baseballScoreSpaceAboveQuarters"></tr>
             <tr>            
@@ -72,7 +76,7 @@ return (
         <hr className="baseballScoreLineBreak"></hr>
         <table border="0px">
             <tr>            
-                <td><div className="baseballTeamNameFont">{this.props.gameData.awayTeam}</div></td>
+                <td><div className="baseballTeamNameFont">{this.props.gameData.awayTeam} <FontAwesomeIcon size="1x" icon="check-circle" color="#85bb65"/></div></td>
                 {this.displayAwayTeamScores()}        
                 <td><div className="baseballTotalScoreFont">{this.props.gameData.awayTeamScores.reduce((a, b) => a + b, 0)}</div></td>    
             </tr>
@@ -82,6 +86,7 @@ return (
                 <td><div className="baseballTotalScoreFont">{this.props.gameData.homeTeamScores.reduce((a, b) => a + b, 0)}</div></td>           
             </tr>        
         </table>
+        
     </div>
 )}}
 
